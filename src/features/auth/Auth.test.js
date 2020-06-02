@@ -4,8 +4,9 @@ import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
 import { Provider } from 'react-redux';
 import { act } from "react-dom/test-utils";
-import store from './app/store';
-import Auth from "./features/auth/Auth";
+import store from '../../app/store';
+import Auth from "./Auth";
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 //import { shallow } from 'enzyme';
 
 let container = null;
@@ -22,7 +23,7 @@ afterEach(() => {
   container = null;
 });
 
-it("renders login action", async () => {
+it("update store with current user", async () => {
   const fakeResponse = {
      access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODk4MjAzMzEsImlhdC",
      first_name: "Firstname",
@@ -41,7 +42,9 @@ it("renders login action", async () => {
   act(() => {
     render(
       <Provider store={store}>
+        <Router>
         <Auth />
+        </Router>
       </Provider>, container);
   });
   const button = container.querySelector("#login-btn");

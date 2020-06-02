@@ -4,10 +4,14 @@ import { Provider } from 'react-redux';
 import store from './app/store';
 import App from './App';
 
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 test('renders home link', () => {
   const { getByText } = render(
     <Provider store={store}>
-      <App />
+     <Router>
+        <App />
+      </Router>
     </Provider>
   );
 

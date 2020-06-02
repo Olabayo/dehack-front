@@ -91,11 +91,11 @@ const [authloaded, setAuth] = useState(false);
 
   return (
     <>
-     <BrowserRouter>
+
      <Navbar />
 
       <Switch>
-        <Route path="/" exact component={Homepage} />
+        <Route exact path="/" component={Homepage} />
         <Route path="/contact" component={Contact} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
@@ -117,7 +117,7 @@ const [authloaded, setAuth] = useState(false);
       </Switch>
 
       <Foot />
-      </BrowserRouter>
+    
     </>
   );
 }

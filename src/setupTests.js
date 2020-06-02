@@ -3,3 +3,8 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect';
+
+// helper to allow localstorage mock via jest
+import 'jest-localstorage-mock';
+
+import 'mutationobserver-shim';

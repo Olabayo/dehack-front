@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 //import images
 import intrologo from '../../assets/img/intro.png'
@@ -11,6 +11,7 @@ let Homepage = () => {
 
   const [jobloaded, setJobLoaded] = useState(false);
   const [jobList, setJobList] = useState([]);
+  const mountedRef = useRef(true)
 
   let history = useHistory();
 
@@ -23,6 +24,7 @@ let Homepage = () => {
         .browseJobs(1, 10)
           .then(response => response)
           .then(json => {
+            if (!mountedRef.current) return null
             console.log(json);
             setJobList(json.jobs)
           })
@@ -35,6 +37,10 @@ let Homepage = () => {
       setJobLoaded(true)
       getJobs()
     }
+
+    return function cleanup() {
+      mountedRef.current = false
+    };
   });
 
   return (

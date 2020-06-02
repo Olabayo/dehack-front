@@ -88,8 +88,8 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
 
     {/* Content section Start */}
     { isLoading
-       ?   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-       :  <div class="not-lds-ring"><div></div><div></div><div></div><div></div></div>
+       ?   <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+       :  <div className="not-lds-ring"><div></div><div></div><div></div><div></div></div>
     }
     <section id="content" className="section-padding">
       <div className="container">
@@ -97,7 +97,7 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
           <div className="col-lg-5 col-md-6 col-xs-12">
             <div className="page-login-form box">
             { errorExists == true &&
-              <div class="alert alert-danger">Error occured please try again</div>
+              <div className="alert alert-danger">Error occured please try again</div>
             }
               <h3>
                 Login
@@ -118,8 +118,8 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
                   </div>
                 </div>
                 <div className="form-group form-check">
-                  <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                  <label className="form-check-label" for="exampleCheck1">Keep Me Signed In</label>
+                  <input type="checkbox" className="form-check-input" id="Check"/>
+                  <label className="form-check-label" htmlFor="Check">Keep Me Signed In</label>
                 </div>
                 <button className="btn btn-common log-btn">Submit</button>
               </form>
