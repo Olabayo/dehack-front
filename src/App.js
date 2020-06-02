@@ -34,7 +34,7 @@ import './assets/css/responsive.css';
 
 import {
   Switch,
-  Route
+  Route, BrowserRouter
 } from "react-router-dom";
 
 import {
@@ -91,6 +91,7 @@ const [authloaded, setAuth] = useState(false);
 
   return (
     <>
+     <BrowserRouter>
      <Navbar />
 
       <Switch>
@@ -116,6 +117,7 @@ const [authloaded, setAuth] = useState(false);
       </Switch>
 
       <Foot />
+      </BrowserRouter>
     </>
   );
 }

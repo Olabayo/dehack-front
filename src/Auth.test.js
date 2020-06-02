@@ -22,14 +22,18 @@ afterEach(() => {
   container = null;
 });
 
-it("renders logs data", async () => {
+it("renders login action", async () => {
   const fakeResponse = {
      access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODk4MjAzMzEsImlhdC",
      first_name: "Firstname",
+     company_id: "8df6d407-db68-48d1-be41-fbde68709d5e",
      last_name: "Lastname"
+
   };
   jest.spyOn(global, "fetch").mockImplementation(() =>
    Promise.resolve({
+     ok: true,
+     statusText: "Ok",
      json: () => Promise.resolve(fakeResponse)
     })
   );
@@ -45,7 +49,7 @@ it("renders logs data", async () => {
   await act(async () => {
     render(
       <Provider store={store}>
-        <Auth />
+        <Auth />//
       </Provider>
       , container);
   });
@@ -55,7 +59,8 @@ it("renders logs data", async () => {
     //button.click();
     button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
   });
-  expect(container.textContent).toContain(fakeResponse.first_name);
+  //expect(container.textContent).toContain(fakeResponse.first_name);
+  expect(container.textContent).toContain("Firstname");
 
   // remove the mock to ensure tests are completely isolated  global.fetch.mockRestore();});
   global.fetch.mockRestore();

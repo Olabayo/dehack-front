@@ -28,7 +28,7 @@ let Auth = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAut
   function loginAction(){
 
     AccountApi
-        .authLogin()
+        .authLogin({username: 'dehack2@yahoo.com', password: 'dehack'})
           .then(response => response)
           .then(json => {
             console.log(json);
