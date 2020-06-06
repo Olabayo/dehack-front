@@ -31,7 +31,6 @@ let Auth = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAut
         .authLogin({username: 'dehack2@yahoo.com', password: 'dehack'})
           .then(response => response)
           .then(json => {
-            console.log(json);
             receiveAuth(json)
             cancelRequestAuth();
           })

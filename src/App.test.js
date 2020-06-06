@@ -15,5 +15,5 @@ test('renders home link', () => {
     </Provider>
   );
 
-  expect(getByText(/home/i)).toBeInTheDocument();
+  expect(getByText(/job that fits your life/i)).toBeInTheDocument();
 });

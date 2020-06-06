@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import {
   useHistory
@@ -32,8 +32,8 @@ const mapStateToProps = (state /*, ownProps*/) => {
 let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAuth, clearAuth }) => {
 
   const [errorExists, setError] = useState(false);
-
   const { register: register, handleSubmit: handleSubmit, errors: errors } = useForm();
+  const mountedRef = useRef(true);
 
   let history = useHistory();
 
@@ -42,8 +42,12 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
     var userObj = localStorage.getItem('userObj', '');
     if(userObj !== null){
       //var userObjJson = JSON.parse(userObj);
+      //if (!mountedRef.current) return null
       history.push("/")
     }
+    return function cleanup() {
+      mountedRef.current = false
+    };
   });
 
   function loginAction(data){
@@ -52,12 +56,15 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
         .authLogin({username: data.email, password: data.password})
           .then(response => response)
           .then(json => {
+            //if (!mountedRef.current) return null
             console.log(json);
             receiveAuth(json)
             cancelRequestAuth();
             history.push("/");
           })
           .catch(message => {
+            console.log(message);
+            //if (!mountedRef.current) return null
               setError(true)
               cancelRequestAuth();
            });

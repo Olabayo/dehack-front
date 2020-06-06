@@ -1,20 +1,16 @@
 import React from 'react';
-import { unmountComponentAtNode } from "react-dom";
-import { screen } from '@testing-library/dom'
 import { Provider } from 'react-redux';
 import { createMemoryHistory } from 'history'
 import { act } from "react-dom/test-utils";
 import { render, fireEvent } from '@testing-library/react'
-import { MemoryRouter, Router  } from "react-router-dom";
+import { Router  } from "react-router-dom";
 import store from '../../app/store';
 import App from '../../App';
 
-import fetchMock from 'jest-fetch-mock';
+require('jest-fetch-mock').enableMocks();
 
-
-
-let container = null;
 beforeEach(() => {
+  fetchMock.resetMocks()
   // setup a DOM element as a render target
   //container = document.createElement("div");
   //document.body.appendChild(container);
@@ -25,19 +21,12 @@ beforeEach(() => {
      last_name: "Lastname"
 
   };
-  fetchMock.mockIf(/^http?:\/\/10.0.0.51:5000.*$/, req => {
+
+  fetchMock.mockIf(/^http?:\/\/10.0.0.51?:5000.*$/, req => {
     if (req.url.endsWith('/auth')) {
-      return {
-        body: fakeResponse,
-        headers: {
-          'X-Some-Response-Header': 'Some header value'
-        }
-      }
+      return Promise.resolve({ body: JSON.stringify(fakeResponse),  status: 200, statusText: 'OK' })
     } else {
-      return {
-        status: 404,
-        body: 'Not Found'
-      }
+      return Promise.resolve({ body: 'Not Found',  status: 404 })
     }
   })
 });
@@ -49,43 +38,34 @@ afterEach(() => {
   //container = null;
 });
 
-test('navigates home when you click the logo', () => {
-  const { container } = render (
-    <Provider store={store}>
-      <MemoryRouter initialEntries={['/login']}>
-        <App />
-      </MemoryRouter>
-    </Provider>
-  );
-});
-
-test('test login action', () => {
+test('test login action', async () => {
   const history = createMemoryHistory()
   const route = '/login'
   history.push(route)
-    act(() => {
-  const { container, getByPlaceholderText } = render(
+
+  const { container, getByPlaceholderText, getByText } = render(
     <Provider store={store}>
        <Router history={history}>
         <App />
       </Router>
     </Provider>
-  );
+   );
 
   //expect(container.innerHTML).toHaveTextContent('404 Not Found');
   expect(getByPlaceholderText('Password')).toBeInTheDocument();
-});
+  expect(getByPlaceholderText('Username')).toBeInTheDocument();
 
-
-
-  //const button = container.querySelector(".log-btn");
-
-  /*
   await act(async () => {
-    //document.getElementById("login-btn").click();
-    //button.click();
-    const input = screen.getByPlaceholderText('Password')
-    button.dispatchEvent(new MouseEvent('click', {bubbles: true}));
+        fireEvent.change(getByPlaceholderText("Password"), {
+          target: { value: 'dehack' },
+        });
+        fireEvent.change(getByPlaceholderText("Username"), {
+          target: { value: 'dehack222@yahoo.com' },
+        });
+        fireEvent.submit(container.querySelector('.login-form'));
   });
-  */
+
+  //expect(container.querySelectorAll('input.form-control')[0].value).toEqual('dehack222@yahoo.com');
+  expect(getByText(/job that fits your life/i)).toBeInTheDocument();
+
 });

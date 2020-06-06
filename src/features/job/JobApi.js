@@ -29,5 +29,32 @@ export default {
           }
         )
       })
+  },
+
+  browseJobsV2: (url) => {
+    return new Promise( (resolve, reject) => {
+      fetch(url, {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            reject(response.statusText);
+          }
+            return response;
+          })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            resolve(result)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
+      })
   }
 }

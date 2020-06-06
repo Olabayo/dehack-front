@@ -24,7 +24,7 @@ let Homepage = () => {
         .browseJobs(1, 10)
           .then(response => response)
           .then(json => {
-            if (!mountedRef.current) return null
+            //if (!mountedRef.current) return null
             console.log(json);
             setJobList(json.jobs)
           })
