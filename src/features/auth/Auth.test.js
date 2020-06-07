@@ -48,15 +48,7 @@ it("update store with current user", async () => {
       </Provider>, container);
   });
   const button = container.querySelector("#login-btn");
-  /*
-  await act(async () => {
-    render(
-      <Provider store={store}>
-        <Auth />//
-      </Provider>
-      , container);
-  });
-  */
+
   await act(async () => {
     //document.getElementById("login-btn").click();
     //button.click();

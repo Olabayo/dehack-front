@@ -25,10 +25,12 @@ let Homepage = () => {
           .then(response => response)
           .then(json => {
             //if (!mountedRef.current) return null
-            console.log(json);
+            console.log(json)
             setJobList(json.jobs)
           })
-          .catch(message => { });
+          .catch(message => {
+            console.log(message)
+           });
   }
 
   useEffect(() => {
@@ -97,93 +99,6 @@ let Homepage = () => {
       </header>
       {/* Header Section End */}
 
-      {/* Category Section Start */}
-      {/*
-      <section className="category section bg-gray">
-        <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Browse Categories</h2>
-            <p>Most popular categories of portal, sorted by popularity</p>
-          </div>
-          <div className="row">
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-1">
-                  <i className="lni-home"></i>
-                </div>
-                <h3>Finance</h3>
-                <p>(4286 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-2">
-                  <i className="lni-world"></i>
-                </div>
-                <h3>Sale/Markting</h3>
-                <p>(2000 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-3">
-                  <i className="lni-book"></i>
-                </div>
-                <h3>Education/Training</h3>
-                <p>(1450 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-4">
-                  <i className="lni-display"></i>
-                </div>
-                <h3>Technologies</h3>
-                <p>(5100 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-5">
-                  <i className="lni-brush"></i>
-                </div>
-                <h3>Art/Design</h3>
-                <p>(5079 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-6">
-                  <i className="lni-heart"></i>
-                </div>
-                <h3>Healthcare</h3>
-                <p>(3235 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-7">
-                  <i className="lni-funnel"></i>
-                </div>
-                <h3>Science</h3>
-                <p>(1800 jobs)</p>
-              </a>
-            </div>
-            <div className="col-lg-3 col-md-6 col-xs-12 f-category">
-              <a href="browse-jobs.html">
-                <div className="icon bg-color-8">
-                  <i className="lni-cup"></i>
-                </div>
-                <h3>Food Services</h3>
-                <p>(4286 jobs)</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-      */}
-      {/* Category Section End */}
-
       {/* Featured Section Start */}
       <section id="featured" className="section">
         <div className="container">
@@ -194,14 +109,21 @@ let Homepage = () => {
           <div className="row">
             { jobList.length > 0 &&
                   jobList.map((job, index) => (
-                    <div className="col-lg-4 col-md-6 col-xs-12">
+                    <div  key={job.id} className="col-lg-4 col-md-6 col-xs-12">
                       <BrowseJob job={job} />
                     </div>
                 ))
 
             }
             <div className="col-12 text-center mt-4">
-              <Link to="/browse/jobs" className="btn btn-common">Browse All Jobs</Link>
+              { jobloaded == true &&
+                <>
+                { jobList.length > 0
+                ?<Link to="/browse/jobs" className="btn btn-common browse-all-btn">Browse All Jobs</Link>
+                :<Link to="/" className="btn btn-common no-jobs-btn">No Open Jobs</Link>
+                }
+                </>
+              }
             </div>
           </div>
         </div>

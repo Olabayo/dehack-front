@@ -9,18 +9,21 @@ import App from '../../App';
 
 require('jest-fetch-mock').enableMocks();
 
+
+const fakeResponse = {
+   access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODk4MjAzMzEsImlhdC",
+   first_name: "Firstname",
+   company_id: "8df6d407-db68-48d1-be41-fbde68709d5e",
+   last_name: "Lastname"
+
+};
+
 beforeEach(() => {
   fetchMock.resetMocks()
   // setup a DOM element as a render target
   //container = document.createElement("div");
   //document.body.appendChild(container);
-  const fakeResponse = {
-     access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODk4MjAzMzEsImlhdC",
-     first_name: "Firstname",
-     company_id: "8df6d407-db68-48d1-be41-fbde68709d5e",
-     last_name: "Lastname"
 
-  };
 
   fetchMock.mockIf(/^http?:\/\/10.0.0.51?:5000.*$/, req => {
     if (req.url.endsWith('/auth')) {
