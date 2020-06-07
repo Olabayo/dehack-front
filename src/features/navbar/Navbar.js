@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   Link,
-  //useHistory
+  useHistory
 } from "react-router-dom";
 
 import logo from '../../assets/img/logo.png';
@@ -29,13 +29,13 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let Navbar = ({ isLoading, currentUser, clearAuth }) => {
 
-    //let history = useHistory();
+    let history = useHistory();
 
     function logoutAction(event){
       event.preventDefault()
       localStorage.removeItem('userObj');
       clearAuth();
-      //history.push("/")
+      history.push("/")
     }
 
   return(

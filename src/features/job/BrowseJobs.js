@@ -2,21 +2,57 @@ import React, {useState, useEffect, useRef } from 'react';
 import ReactPaginate from 'react-paginate';
 import SlimJob from './SlimJob';
 import JobApi from './JobApi';
+import {
+  useLocation,
+  useHistory
+} from "react-router-dom";
 
 import {configSettings} from '../../config/config';
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 let BrowseJobs = () =>{
+
+  let query = useQuery();
+
+  let history = useHistory();
 
   const [joblistloaded, setJoblistLoaded] = useState(false);
   const [jobList, setJobList] = useState([]);
   const [jobListCount, setJobListCount] = useState(0);
   const [jobListPage, setJobListPage] = useState(0);
+  const [filterString, setFilterString] = useState("");
+  const [filterStringUpdate, setFilterStringUpdate] = useState("");
   const mountedRef = useRef(true);
+
+  function handleFilterClick(){
+      if(filterString != filterStringUpdate){
+        let encodeQuery = encodeURIComponent(filterStringUpdate).replace(/%20/g, '+')
+        let uri = "/browse/jobs?q=";
+        setJoblistLoaded(false);
+        if(filterStringUpdate && filterStringUpdate.trim() != ""){
+          history.push(uri + encodeQuery)
+        }else{
+          history.push("/browse/jobs");
+        }
+
+      }
+  }
+
+  function updateInputValue(ev){
+    setFilterStringUpdate(ev.target.value);
+  }
 
   function handlePageClick(data){
     var offset = data.selected + 1;
     if(jobListPage !== offset){
-      var url = configSettings.apiEndPoint + "/browse/jobs?c=10&p=" + offset
+      let pathParam = "/browse/jobs?c=10&p=" + offset
+      if(filterString && filterString.trim() != ""){
+        pathParam = pathParam + "&q="  + filterString
+      }
+      var url = configSettings.apiEndPoint + pathParam;
       getJobs(url, offset)
     }
 
@@ -44,10 +80,17 @@ let BrowseJobs = () =>{
   }
 
   useEffect(() => {
-
     if(!joblistloaded){
+      if(query.get("q")){
+        setFilterString(query.get("q"))
+        console.log(query.get("q"));
+      }
       setJoblistLoaded(true)
-      let url = configSettings.apiEndPoint + '/browse/jobs?c=10&p=1'
+      let pathParam = '/browse/jobs?c=10&p=1'
+      if(query.get("q") && query.get("q").trim() != ""){
+        pathParam = pathParam + "&q=" + query.get("q")
+      }
+      let url = configSettings.apiEndPoint + pathParam;
       getJobs(url, 1)
     }
     return function cleanup() {
@@ -78,13 +121,15 @@ let BrowseJobs = () =>{
           <div className="col-lg-12 col-md-12 col-xs-12">
             <div className="wrap-search-filter row">
               <div className="col-lg-5 col-md-5 col-xs-12">
-                <input type="text" className="form-control" placeholder="Keyword: Name, Tag" />
+                <input defaultValue={filterString} onChange={updateInputValue} required type="text" className="form-control" placeholder="Keyword: Name, Tag" />
               </div>
-              <div className="col-lg-5 col-md-5 col-xs-12">
-                <input type="text" className="form-control" placeholder="Location: City, State, Zip" />
-              </div>
+              {/*
+                <div className="col-lg-5 col-md-5 col-xs-12">
+                  <input type="text" className="form-control" placeholder="Location: City, State, Zip" />
+                </div>
+              */}
               <div className="col-lg-2 col-md-2 col-xs-12">
-                <button type="submit" className="btn btn-common float-right">Filter</button>
+                <button type="submit" onClick={handleFilterClick} className="btn btn-common float-right">Filter</button>
               </div>
             </div>
           </div>

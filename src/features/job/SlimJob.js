@@ -22,17 +22,19 @@ let SlimJob = ({ job }) =>{
         </div>
         <div className="col-lg-2 col-md-2 col-xs-12 text-center">
           <span className="btn-open">
-            7 Open Jobs
+            1 Open Jobs
           </span>
         </div>
         <div className="col-lg-2 col-md-2 col-xs-12 text-right">
+
          <div className="location">
-           <i className="lni-map-marker"></i> New Yourk, US
+           <i className="lni-map-marker"></i> US
          </div>
         </div>
         <div className="col-lg-2 col-md-2 col-xs-12 text-right">
           <span className="btn-full-time">Full Time</span>
         </div>
+
         <div className="col-lg-2 col-md-2 col-xs-12 text-right">
           <span className="btn-apply">Apply Now</span>
         </div>
