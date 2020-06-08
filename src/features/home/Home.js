@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
+import Autosuggest from 'react-autosuggest';
 //import images
 import intrologo from '../../assets/img/intro.png'
 
@@ -7,16 +9,103 @@ import CompanyApi from '../company/CompanyApi';
 
 import BrowseJob from '../company/BrowseJob';
 
+import './home.css';
+
+import JobApi from '../job/JobApi';
+
+
 let Homepage = () => {
+
+  const languages = [
+    {
+      title: 'C',
+      year: 1972
+    },
+    {
+      title: 'Elm',
+      year: 2012
+    }
+  ];
 
   const [jobloaded, setJobLoaded] = useState(false);
   const [jobList, setJobList] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const [value, setValue] = useState('');
   const mountedRef = useRef(true)
+
+  // Imagine you have a list of languages that you'd like to autosuggest.
+
+  // Teach Autosuggest how to calculate suggestions for any given input value.
+  const getSuggestions = value => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0 ? [] : languages.filter(lang =>
+      lang.title.toLowerCase().slice(0, inputLength) === inputValue
+    );
+  };
+
+  const getSuggestionValue = suggestion => suggestion.title;
+
+  // Use your imagination to render suggestions.
+  const renderSuggestion = suggestion => (
+    <div>
+      {suggestion.title}
+    </div>
+  );
+
+  let onChange = (event, { newValue }) => {
+      setValue(newValue)
+  };
+
+  const searchJobTitles = (title) => {
+    JobApi
+        .searchJobTitles(title, 10)
+          .then(response => response)
+          .then(json => {
+            //if (!mountedRef.current) return null
+            console.log(json)
+            setSuggestions(json.jobs)
+          })
+          .catch(message => {
+            console.log(message)
+           });
+  }
+
+  let onSuggestionsFetchRequested = ({value }) => {
+    //setSuggestions(getSuggestions(value))
+    // search
+    if(value.length > 3){
+      value = encodeURIComponent(value).replace(/%20/g, '+')
+      searchJobTitles(value)
+    }else{
+      setSuggestions([])
+    }
+  };
+
+
+  // Autosuggest will call this function every time you need to clear suggestions.
+  let onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+    const inputProps = {
+        placeholder: 'Type a job title',
+        value: value,
+        onChange: onChange
+    };
 
   let history = useHistory();
 
-  function handleSubmit(){
-    history.push("/browse/jobs")
+  function handleSubmit(event){
+    event.preventDefault();
+    if(value.length > 0){
+      let encodeQuery =  encodeURIComponent(value).replace(/%20/g, '+')
+      let uri ="/browse/jobs?q="
+      history.push(uri + encodeQuery)
+    }else{
+      alert("Enter a title")
+    }
   }
 
   function getJobs(){
@@ -56,13 +145,24 @@ let Homepage = () => {
                 <h2 className="head-title">Find the  <br /> job that fits your life</h2>
                 <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus, id tincidunt nisi porta sit amet. Suspendisse et sapien varius, pellentesque dui non.</p>
                 <div className="job-search-form">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="row">
-                      <div className="col-lg-5 col-md-5 col-xs-12">
+                      <div className="col-lg-10 col-md-10 col-xs-12">
+                        {/*
                         <div className="form-group">
-                          <input className="form-control" type="text" placeholder="Job Title or Company Name" />
+                          <input className="form-control" type="text" placeholder="Job Title" />
                         </div>
+                        */}
+                        <Autosuggest
+                          suggestions={suggestions}
+                          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                          onSuggestionsClearRequested={onSuggestionsClearRequested}
+                          getSuggestionValue={getSuggestionValue}
+                          renderSuggestion={renderSuggestion}
+                          inputProps={inputProps}
+                        />
                       </div>
+                      {/*
                       <div className="col-lg-5 col-md-5 col-xs-12">
                         <div className="form-group">
                           <div className="search-category-container">
@@ -81,8 +181,9 @@ let Homepage = () => {
                           <i className="lni-map-marker"></i>
                         </div>
                       </div>
+                      */}
                       <div className="col-lg-2 col-md-2 col-xs-12">
-                        <button onClick={handleSubmit} ype="submit" className="button"><i className="lni-search"></i></button>
+                        <button type="submit" className="button"><i className="lni-search"></i></button>
                       </div>
                     </div>
                   </form>
