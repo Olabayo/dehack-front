@@ -28,6 +28,10 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
 
     const [profileResult, setProfileResult] = useState({});
 
+    const [stateList, setStateList] = useState([]);
+
+    const [cityList, setCityList] = useState([]);
+
     function getOverview(token){
       ProfileApi
           .getOverview(token)
@@ -35,6 +39,8 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
             .then(json => {
               console.log(json);
               setProfileResult(json.overview.profile);
+              setStateList(json.state_list);
+              setCityList(json.city_list);
             })
             .catch(message => { });
     }
@@ -52,6 +58,23 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
       }
     }
     });
+
+    function handleStateChange(event){
+      if(event.target.value == "0" || event.target.value == 0){
+        setCityList([])
+      }else{
+      ProfileApi
+          .getCities(event.target.value)
+            .then(response => response)
+            .then(json => {
+              setCityList(json.cities)
+
+            })
+            .catch(message => {
+
+             });
+      }
+    }
 
     function postAction(token, data){
 
@@ -83,16 +106,20 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
         }
 
     function onSubmit(data){
-      requestOverview();
-      var userObj = localStorage.getItem('userObj', '');
-      if(userObj !== null ){
-        var userObjJson = JSON.parse(userObj);
-        console.log("Json User Obj", userObjJson);
-        let token = "JWT " + userObjJson.access_token
-        if(JSON.stringify(profileResult) === '{}'){
-          postAction(token, data);
-        }else{
-          putAction(token, data);
+      if(data.state_id == "0" || data.state_id == 0){
+        alert("Pick a state")
+      }else{
+
+        var userObj = localStorage.getItem('userObj', '');
+        if(userObj !== null ){
+          var userObjJson = JSON.parse(userObj);
+          console.log("Json User Obj", userObjJson);
+          let token = "JWT " + userObjJson.access_token
+          if(JSON.stringify(profileResult) === '{}'){
+            postAction(token, data);
+          }else{
+            putAction(token, data);
+          }
         }
       }
     }
@@ -157,14 +184,45 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
                 </div>
                 <div className="form-group">
                   <label className="control-label">State</label>
+                  {/*
                   <input type="text" name="state_id" defaultValue={profileResult.state_id} ref={register({ required: true })} className="form-control"  placeholder="State"/>
                   {errors.state_id && <span>This field is required</span>}
+                  */}
+                  <select className="form-control" name="state_id" onChange={handleStateChange}  ref={register({ required: true })}>
+                    { profileResult
+                      ? <option value="0">Select a state</option>
+                      : <option selected value="0">Select a state</option>
+                    }
+                    { stateList.map((state, i) =>
+                      <>
+                        { profileResult && profileResult.state_id == state.id
+                          ?<option selected value={state.id}>{state.state_name}</option>
+                          :<option value={state.id}>{state.state_name}</option>
+                        }
+                      </>
+                    )}
+                  </select>
+                    {errors.state_id && <span>This field is required</span>}
                 </div>
                 <div className="form-group">
                   <label className="control-label">City</label>
+                  {/*
                   <input type="text" name="city_id" defaultValue={profileResult.city_id} ref={register({ required: true })} className="form-control"  placeholder="City"/>
                   {errors.city_id && <span>This field is required</span>}
+                  */}
+                  <select className="form-control" name="city_id" ref={register({ required: true })}>
+                    { cityList.map((state, i) =>
+                      <>
+                        { profileResult && profileResult.city_id == state.id
+                          ?<option selected value={state.id}>{state.city}</option>
+                          :<option value={state.id}>{state.city}</option>
+                        }
+                      </>
+                    )}
+                  </select>
+                  {errors.city_id && <span>This field is required</span>}
                 </div>
+
                 <div className="form-group">
                   <label className="control-label">Zip code</label>
                   <input type="text" name="zip_code" defaultValue={profileResult.zip_code} ref={register({ required: true })} className="form-control"  placeholder="Zip code"/>

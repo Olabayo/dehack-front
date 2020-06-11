@@ -73,12 +73,13 @@ const [authloaded, setAuth] = useState(false);
     }
 
     function handleScrollChange(event) {
-
-      let scrollTop = event.srcElement.documentElement.scrollTop;
-      if (scrollTop >= 100) {
-        event.srcElement.body.querySelector(".scrolling-navbar").classList.add("top-nav-collapse");
-      } else {
-        event.srcElement.body.querySelector(".scrolling-navbar").classList.remove("top-nav-collapse");
+      if(event.srcElement.documentElement){
+        let scrollTop = event.srcElement.documentElement.scrollTop;
+        if (scrollTop >= 100) {
+          event.srcElement.body.querySelector(".scrolling-navbar").classList.add("top-nav-collapse");
+        } else {
+          event.srcElement.body.querySelector(".scrolling-navbar").classList.remove("top-nav-collapse");
+        }
       }
     }
     window.addEventListener('scroll', handleScrollChange, true);
@@ -117,7 +118,7 @@ const [authloaded, setAuth] = useState(false);
       </Switch>
 
       <Foot />
-    
+
     </>
   );
 }

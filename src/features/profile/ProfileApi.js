@@ -11,6 +11,7 @@ const _putExperience = configSettings.apiEndPoint + '/experiences';
 const _putEducation = configSettings.apiEndPoint + '/education';
 const _changePass = configSettings.apiEndPoint + '/changepassword';
 const _browseResumes = configSettings.apiEndPoint + '/browse/resumes';
+const _getCities = configSettings.apiEndPoint + '/cities';
 
 export default {
 
@@ -308,6 +309,33 @@ export default {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Authorization': token
+          }
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            reject(response.statusText);
+          }
+            return response;
+          })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            resolve(result)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
+      })
+  },
+
+  getCities: (state_id) => {
+    return new Promise( (resolve, reject) => {
+      fetch(_getCities + `?state_id=${state_id}`, {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           }
         })
         .then(function(response) {
