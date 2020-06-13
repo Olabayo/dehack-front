@@ -82,8 +82,9 @@ let Navbar = ({ isLoading, currentUser, clearAuth }) => {
                     ? <>
                     { 'company_id' in currentUser && currentUser.company_id !== ""
                     ? <><li>
-                      <Link className="dropdown-item dropdown-toggle" to="/companyprofile">Company profile</Link>
-                    </li>
+                        <Link className="dropdown-item dropdown-toggle" to="/companyprofile">Company profile</Link>
+                        <Link className="dropdown-item dropdown-toggle" to="/browse/resumes">Browse resumes</Link>
+                      </li>
                     </>
                     : <>
                       <li>

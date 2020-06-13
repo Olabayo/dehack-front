@@ -2,11 +2,11 @@ import React from 'react';
 
 import avatar from '../../assets/img/jobs/avatar-1.jpg'
 
-let ResumeSummary = ({ resume}) => {
+let ResumeSummaryWide = ({ resume}) => {
 
   return(
     <>
-    <div className="col-lg-12 col-md-6 col-xs-12">
+    <div className="col-lg-6 col-md-6 col-xs-12">
       <div className="manager-resumes-item">
         <div className="manager-content">
           <a href="resume.html"><img className="resume-thumb" src={avatar} alt=""/></a>
@@ -17,7 +17,7 @@ let ResumeSummary = ({ resume}) => {
             </div>
             <div className="manager-meta">
               <span className="location"><i className="ti-location-pin"></i> { resume.street }, USA</span>
-              <span className="rate"><i className="ti-time"></i> $0 per hour</span>
+              <span className="rate"><i className="ti-time"></i> $55 per hour</span>
             </div>
           </div>
         </div>
@@ -43,4 +43,4 @@ let ResumeSummary = ({ resume}) => {
   );
 }
 
-export default ResumeSummary;
+export default ResumeSummaryWide;
