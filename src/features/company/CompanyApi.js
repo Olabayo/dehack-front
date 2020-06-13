@@ -239,4 +239,31 @@ export default {
         )
       })
   },
+  getApplications: (token, job_id) => {
+    return new Promise( (resolve, reject) => {
+      fetch(_jobApplication + `?job_id=${job_id}`, {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': token
+          }
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            reject(response.statusText);
+          }
+            return response;
+          })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            resolve(result)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
+      })
+  },
 }

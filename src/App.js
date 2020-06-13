@@ -22,6 +22,7 @@ import Foot from './features/navbar/Footer';
 import JobDetail from './features/company/JobDetail';
 import BrowseJobs from './features/job/BrowseJobs';
 import BrowseResume from './features/profile/BrowseResume';
+import BrowseJobResume from './features/company/BrowseJobResume';
 
 //import css
 import './assets/css/bootstrap.min.css';
@@ -117,6 +118,7 @@ const [authloaded, setAuth] = useState(false);
         <Route path="/job/:id" component={JobDetail} />
         <Route path="/browse/jobs" component={BrowseJobs} />
         <Route path="/browse/resumes" component={BrowseResume} />
+        <Route path="/browse/jobresumes/:id" component={BrowseJobResume} />
       </Switch>
 
       <Foot />

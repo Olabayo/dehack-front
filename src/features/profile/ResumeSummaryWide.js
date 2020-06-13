@@ -4,9 +4,28 @@ import avatar from '../../assets/img/jobs/avatar-1.jpg'
 
 let ResumeSummaryWide = ({ resume}) => {
 
+  function genSkill(){
+    var min=1;
+    var max=10;
+    var random = Math.floor(Math.random() * (+max - +min)) + +min;
+    var rank_text = "Highly skilled";
+    if(random >= 8){
+      rank_text = "Highly skilled";
+    }else if (random === 7) {
+      rank_text = "Moderately skilled";
+    }else if (random >= 5 && random < 7) {
+      rank_text = "Averagly skilled";
+    }else{
+      rank_text = "Below Averagly skilled";
+    }
+    return {"rank": random, "rank_text": rank_text};
+  }
+
+  const ranking = genSkill();
+
   return(
     <>
-    <div className="col-lg-6 col-md-6 col-xs-12">
+    <div className="col-lg-12 col-md-6 col-xs-12">
       <div className="manager-resumes-item">
         <div className="manager-content">
           <a href="resume.html"><img className="resume-thumb" src={avatar} alt=""/></a>
@@ -33,7 +52,9 @@ let ResumeSummaryWide = ({ resume}) => {
               <span>Wordpress</span>
             </div>
             <div className="resume-exp float-right">
-              <a href="#" className="btn btn-common btn-xs">Exp. 4 Year</a>
+              <a href="#" className="btn btn-common btn-xs">
+                Rank: {ranking.rank} ({ranking.rank_text})
+              </a>
             </div>
           </div>
         </div>
