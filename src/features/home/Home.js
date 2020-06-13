@@ -142,8 +142,8 @@ let Homepage = () => {
           <div className="row space-100">
             <div className="col-lg-7 col-md-12 col-xs-12">
               <div className="contents">
-                <h2 className="head-title">Find the  <br /> job that fits your life</h2>
-                <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum congue posuere lacus, id tincidunt nisi porta sit amet. Suspendisse et sapien varius, pellentesque dui non.</p>
+                <h2 className="head-title">Find Your Fit</h2>
+                <p>The perfect platform for employers and employees to meet success.</p>
                 <div className="job-search-form">
                   <form onSubmit={handleSubmit}>
                     <div className="row">
