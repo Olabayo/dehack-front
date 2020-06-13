@@ -17,9 +17,9 @@ let BrowseJobResume = () =>{
   const [emptyList, setEmptyList] = useState(false);
   let { id } = useParams();
 
-  function getApplications(token, page){
+  function getApplications(token, page, count){
     CompanyApi
-        .getApplications(token, id)
+        .getApplications(token, page, count, id)
           .then(response => response)
           .then(json => {
             console.log(json);
@@ -36,7 +36,7 @@ let BrowseJobResume = () =>{
     var offset = data.selected + 1;
     if(resumeListPage !== offset){
 
-      getApplications(tokenStr, offset)
+      getApplications(tokenStr, offset, 10)
     }
 
     /*
@@ -56,7 +56,7 @@ let BrowseJobResume = () =>{
           let token = "JWT " + userObjJson.access_token
           setResumelistLoaded(true)
           setTokenStr(token)
-          getApplications(token, 1)
+          getApplications(token, 1, 10)
         }
     }
   });
@@ -88,7 +88,7 @@ let BrowseJobResume = () =>{
             ))
             }
             <div className="col-12 text-center mt-4">
-              { emptyList == true && resumelistloaded && resumeList.length == 0 &&
+              { resumelistloaded && resumeList.length == 0 &&
                 <Link to="/" className="btn btn-common no-jobs-btn">No resumes</Link>
               }
             </div>

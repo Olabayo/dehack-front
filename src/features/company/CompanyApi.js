@@ -239,9 +239,9 @@ export default {
         )
       })
   },
-  getApplications: (token, job_id) => {
+  getApplications: (token, page, count, job_id) => {
     return new Promise( (resolve, reject) => {
-      fetch(_jobApplication + `?job_id=${job_id}`, {
+      fetch(_jobApplication + `?job_id=${job_id}&c=${count}&p=${page}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',
