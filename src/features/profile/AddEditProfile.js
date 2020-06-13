@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 import { requestOverview, cancelOverviewRequest,
   receiveOverview } from './profileSlice';
@@ -133,6 +134,12 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
           <div className="col-lg-12">
             <div className="inner-header">
               <h3>Create Resume</h3>
+              <span>
+                <Link to="/">Home</Link> /
+              </span>
+              <span>
+                <Link to="/profile">Profile</Link> /
+              </span>
             </div>
           </div>
         </div>

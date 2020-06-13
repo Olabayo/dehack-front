@@ -1,7 +1,8 @@
 import React, { useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { useForm } from "react-hook-form";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
 
 import  { requestProfile, cancelProfileRequest } from './companySlice';
 
@@ -17,7 +18,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
   }
 }
 
-let EditJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
+let EditJob = ({ breadcrumbs, isLoading, requestProfile, cancelProfileRequest }) => {
 
   const [errorExists, setError] = useState(false);
   const [responseSucces, setSuccess] = useState(false);
@@ -92,6 +93,14 @@ let EditJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
         <div className="col-lg-12">
           <div className="inner-header">
             <h3>Create A Job</h3>
+            <div>
+            <span>
+              <Link to="/">Home</Link> /
+            </span>
+            <span>
+              <Link to="/companyprofile">Company profile</Link> /
+            </span>
+            </div>
           </div>
         </div>
       </div>
@@ -152,4 +161,4 @@ let EditJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
 
 EditJob = connect(mapStateToProps, mapDispatch)(EditJob)
 
-export default EditJob;
+export default withBreadcrumbs()(EditJob);

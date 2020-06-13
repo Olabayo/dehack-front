@@ -70,6 +70,12 @@ let BrowseJobResume = () =>{
           <div className="col-lg-12">
             <div className="inner-header">
               <h3>Browse Resumes</h3>
+              <span>
+                <Link to="/">Home</Link> /
+              </span>
+              <span>
+                <Link to="/companyprofile">Company profile</Link> /
+              </span>
             </div>
           </div>
         </div>

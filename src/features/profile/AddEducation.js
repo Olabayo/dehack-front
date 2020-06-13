@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 import { requestOverview, cancelOverviewRequest,
   receiveOverview } from './profileSlice';
@@ -58,6 +59,12 @@ let AddEducation = ({isLoading, profileOverview, currentUser, requestOverview, c
         <div className="col-lg-12">
           <div className="inner-header">
             <h3>Create Education</h3>
+            <span>
+              <Link to="/">Home</Link> /
+            </span>
+            <span>
+              <Link to="/profile">Profile</Link> /
+            </span>
           </div>
         </div>
       </div>

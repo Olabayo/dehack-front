@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { connect } from 'react-redux';
 import { useForm } from "react-hook-form";
-
+import { Link } from 'react-router-dom';
 import  { requestProfile, cancelProfileRequest } from './companySlice';
 
 import CompanyApi from './CompanyApi';
@@ -63,6 +63,12 @@ let AddJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
         <div className="col-lg-12">
           <div className="inner-header">
             <h3>Create A Job</h3>
+            <span>
+              <Link to="/">Home</Link> /
+            </span>
+            <span>
+              <Link to="/companyprofile">Company profile</Link> /
+            </span>
           </div>
         </div>
       </div>

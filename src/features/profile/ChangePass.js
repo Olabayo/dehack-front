@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from "react-hook-form";
+import { Link } from 'react-router-dom';
 
 import { requestChangePass, cancelChangePassRequest} from './profileSlice';
 import ProfileApi from './ProfileApi';
@@ -62,6 +63,12 @@ let ChangePass = ({ isLoading, requestChangePass, cancelChangePassRequest }) => 
             <div className="col-lg-12">
               <div className="inner-header">
                 <h3>Change Password</h3>
+                <span>
+                  <Link to="/profile">Profile</Link> /
+                </span>
+                <span>
+                  <Link to="/companyprofile">Company profile</Link> /
+                </span>
               </div>
             </div>
           </div>

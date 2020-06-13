@@ -270,6 +270,8 @@ button:focus {
       color: #333;
       font-weight: 700;
       font-size: 30px; }
+    .page-header .inner-header span {
+      padding-right: 5px; }    
   .page-header .page-breacrumbs {
     margin-top: 23px;
     display: inline-block;
@@ -460,8 +462,8 @@ button:focus {
     -ms-transform: rotate(360deg);
     -o-transform: rotate(360deg);
     transform: rotate(360deg); } }
-/* ========================================================================== 
- Scroll To Up 
+/* ==========================================================================
+ Scroll To Up
  ========================================================================== */
 .back-to-top {
   display: none;
@@ -2502,7 +2504,7 @@ label {
   color: #26ae61; }
 
 /* ==========================================================================
-   Blog 
+   Blog
    ========================================================================== */
 #blog .blog-item-wrapper {
   background: #fff; }
