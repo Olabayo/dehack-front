@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import featuredImg4 from '../../assets/img/features/img4.png';
 
 import CompanyApi from './CompanyApi';
@@ -15,6 +16,7 @@ let JobDetail = () => {
   const [jobList, setJobList] = useState([]);
   const [requestFetching, setRequestFetching] = useState(false);
   const [applyBtnText, setApplyBtnText] = useState('Apply Now')
+  const [enrollStatus, setEnrollStatus] = useState(false)
   let { id } = useParams();
 
   function getJob(id){
@@ -30,6 +32,10 @@ let JobDetail = () => {
           .then(json => {
             console.log(json);
             setResultLoaded(json.job)
+            if(json.apply_status){
+              setApplyBtnText('Enrolled');
+              setEnrollStatus(true);
+            }
           })
           .catch(message => {
            });
@@ -54,10 +60,13 @@ let JobDetail = () => {
             console.log(json);
             setRequestFetching(false);
             setApplyBtnText("Enrolled")
+            toast("Application successful");
+            setEnrollStatus(true);
           })
           .catch(message => {
             setRequestFetching(false);
-            setApplyBtnText("Apply Now")
+            setApplyBtnText("Apply Now");
+            toast("Application error!");
            });
   }
 
@@ -68,9 +77,14 @@ let JobDetail = () => {
       var userObjJson = JSON.parse(userObj);
       token = "JWT " + userObjJson.access_token;
       if(requestFetching == false){
+        if(enrollStatus == false){
         setRequestFetching(true);
         setApplyBtnText("Applying please wait...");
         postApplication(token);
+      }else{
+        alert("You are enrolled");
+      }
+
       }else{
         alert("Please wait")
       }
@@ -103,6 +117,7 @@ let JobDetail = () => {
               <div className="img-wrapper">
                 {/*<img src={companyLogo} alt=""/>*/}
               </div>
+              <ToastContainer position="bottom-left" />
               <div className="content">
                 <h3 className="product-title">{ jobResult.title }</h3>
                 <p className="brand">{ jobResult.company.name }</p>
