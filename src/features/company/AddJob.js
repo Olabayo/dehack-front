@@ -49,7 +49,7 @@ let AddJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
     if(userObj !== null ){
       var userObjJson = JSON.parse(userObj);
       console.log("Json User Obj", userObjJson);
-      let token = "JWT " + userObjJson.access_token
+      let token = "JWT " + userObjJson.access_token;
       postAction(token, data);
     }
   }

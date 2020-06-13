@@ -13,17 +13,26 @@ let JobDetail = () => {
   const [jobResult, setResultLoaded] = useState({"company": {}});
   const [joblistloaded, setJoblistLoaded] = useState(false);
   const [jobList, setJobList] = useState([]);
+  const [requestFetching, setRequestFetching] = useState(false);
+  const [applyBtnText, setApplyBtnText] = useState('Apply Now')
   let { id } = useParams();
 
   function getJob(id){
+    let token = "";
+    var userObj = localStorage.getItem('userObj', '');
+    if(userObj !== null){
+      var userObjJson = JSON.parse(userObj);
+      token = "JWT " + userObjJson.access_token
+    }
     CompanyApi
-        .getGuestJob(id)
+        .getGuestJob(id, token)
           .then(response => response)
           .then(json => {
             console.log(json);
             setResultLoaded(json.job)
           })
-          .catch(message => { });
+          .catch(message => {
+           });
   }
 
   function getJobs(){
@@ -35,6 +44,39 @@ let JobDetail = () => {
             setJobList(json.jobs)
           })
           .catch(message => { });
+  }
+
+  function postApplication(token){
+    CompanyApi
+        .postApplication(token, id)
+          .then(response => response)
+          .then(json => {
+            console.log(json);
+            setRequestFetching(false);
+            setApplyBtnText("Enrolled")
+          })
+          .catch(message => {
+            setRequestFetching(false);
+            setApplyBtnText("Apply Now")
+           });
+  }
+
+  function handleApply(){
+    let token = "";
+    var userObj = localStorage.getItem('userObj', '');
+    if(userObj !== null){
+      var userObjJson = JSON.parse(userObj);
+      token = "JWT " + userObjJson.access_token;
+      if(requestFetching == false){
+        setRequestFetching(true);
+        setApplyBtnText("Applying please wait...");
+        postApplication(token);
+      }else{
+        alert("Please wait")
+      }
+    }else{
+      alert("You need to be logged in");
+    }
   }
 
   useEffect(() => {
@@ -101,7 +143,9 @@ let JobDetail = () => {
               </ul>
               <h5>How To Apply</h5>
               <p>Create an account upload a profile and apply here</p>
-              <a href="#" className="btn btn-common">Apply job</a>
+              <a onClick={handleApply} className="btn btn-common">
+                {applyBtnText}
+              </a>
             </div>
           </div>
           <div className="col-lg-4 col-md-12 col-xs-12">

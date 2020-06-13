@@ -59,7 +59,7 @@ const [authloaded, setAuth] = useState(false);
     var userObj = localStorage.getItem('userObj', '');
     if(userObj !== null && authloaded !== true ){
       var userObjJson = JSON.parse(userObj);
-      console.log("Json User Obj", userObjJson);
+      //console.log("Json User Obj", userObjJson);
 
       receiveAuth(userObjJson);
       setAuth(true);

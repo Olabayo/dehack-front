@@ -4,6 +4,7 @@ const _company = configSettings.apiEndPoint + '/companies';
 const _job = configSettings.apiEndPoint + '/jobs';
 const _guestJob = configSettings.apiEndPoint + '/guestjobs';
 const _browseJob = configSettings.apiEndPoint + '/browse/jobs';
+const _jobApplication = configSettings.apiEndPoint + '/jobapplications';
 
 export default {
 
@@ -121,14 +122,22 @@ export default {
       })
   },
 
-  getGuestJob: (jobId) => {
+  getGuestJob: (jobId, token="") => {
+    let headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    }
+    if(token != ""){
+      headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      }
+    }
     return new Promise( (resolve, reject) => {
       fetch(_guestJob + "/" + jobId, {
           method: 'get',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
+          headers: headers
         })
         .then(function(response) {
           if (!response.ok) {
@@ -184,6 +193,34 @@ export default {
             'Accept': 'application/json',
             'Authorization': token
           }
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            reject(response.statusText);
+          }
+            return response;
+          })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            resolve(result)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
+      })
+  },
+  postApplication: (token, job_id) => {
+    return new Promise( (resolve, reject) => {
+      fetch(_jobApplication, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': token
+          },
+          body: JSON.stringify({job_id: job_id})
         })
         .then(function(response) {
           if (!response.ok) {
