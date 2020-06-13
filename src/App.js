@@ -64,6 +64,7 @@ const [authloaded, setAuth] = useState(false);
       receiveAuth(userObjJson);
       setAuth(true);
     }
+    /*
     if(currentUser && currentUser.access_token){
       console.log("Loading");
       if(authloaded !== true){
@@ -71,6 +72,7 @@ const [authloaded, setAuth] = useState(false);
        setAuth(true);
      }
     }
+    */
 
     function handleScrollChange(event) {
       if(event.srcElement.documentElement){

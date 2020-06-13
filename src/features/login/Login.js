@@ -58,6 +58,7 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
           .then(json => {
             //if (!mountedRef.current) return null
             console.log(json);
+            localStorage.setItem('userObj', JSON.stringify(json));
             receiveAuth(json)
             cancelRequestAuth();
             history.push("/");
