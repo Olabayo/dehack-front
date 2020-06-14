@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import ScrollToTop from './util/ScrollToTop';
 import Login from './features/login/Login';
 import Signup from './features/login/Signup';
 import AuthStatus from './features/login/AuthStatus';
@@ -96,9 +97,8 @@ const [authloaded, setAuth] = useState(false);
 
   return (
     <>
-
+     <ScrollToTop />
      <Navbar />
-
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/contact" component={Contact} />
