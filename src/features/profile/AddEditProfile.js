@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { requestOverview, cancelOverviewRequest,
   receiveOverview } from './profileSlice';
 
@@ -32,6 +33,7 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
     const [stateList, setStateList] = useState([]);
 
     const [cityList, setCityList] = useState([]);
+    const [postBtnText, setPostBtnText] = useState('Submit');
 
     function getOverview(token){
       ProfileApi
@@ -85,9 +87,13 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
             .then(json => {
               console.log(json);
               cancelOverviewRequest();
+              toast("Request successful");
+              setPostBtnText("Submit");
             })
             .catch(message => {
                 cancelOverviewRequest();
+                toast("Request error");
+                setPostBtnText("Submit");
              });
       }
 
@@ -100,9 +106,13 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
                 console.log(json);
                 cancelOverviewRequest();
                 setProfileResult(json.profile);
+                toast("Request successful");
+                setPostBtnText("Submit");
               })
               .catch(message => {
                   cancelOverviewRequest();
+                  toast("Request error");
+                  setPostBtnText("Submit");
                });
         }
 
@@ -117,8 +127,10 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
           console.log("Json User Obj", userObjJson);
           let token = "JWT " + userObjJson.access_token
           if(JSON.stringify(profileResult) === '{}'){
+            setPostBtnText("Submitting please wait...");
             postAction(token, data);
           }else{
+            setPostBtnText("Submitting please wait...");
             putAction(token, data);
           }
         }
@@ -146,7 +158,7 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
       </div>
     </div>
     {/* Page Header End */}
-
+    <ToastContainer position="bottom-left" />
     {/* Content section Start */}
     { isLoading
        ?   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
@@ -235,7 +247,7 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
                   <input type="text" name="zip_code" defaultValue={profileResult.zip_code} ref={register({ required: true })} className="form-control"  placeholder="Zip code"/>
                   {errors.zip_code && <span>This field is required</span>}
                 </div>
-                <button className="btn btn-common">Submit</button>
+                <button className="btn btn-common">{ postBtnText }</button>
               </form>
             </div>
           </div>
