@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { requestOverview, cancelOverviewRequest,
   receiveOverview } from './profileSlice';
 
@@ -23,6 +24,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 let AddExperience = ({isLoading, profileOverview, currentUser, requestOverview, cancelOverviewRequest, receiveOverview}) => {
 
   const { register: register, handleSubmit: handleSubmit,  errors: errors } = useForm();
+  const [postBtnText, setPostBtnText] = useState('Submit');
 
   function postAction(token, data){
 
@@ -32,9 +34,13 @@ let AddExperience = ({isLoading, profileOverview, currentUser, requestOverview, 
           .then(json => {
             console.log(json);
             cancelOverviewRequest();
+            toast("Request successful");
+            setPostBtnText("Submit");
           })
           .catch(message => {
               cancelOverviewRequest();
+              toast("Request error");
+              setPostBtnText("Submit");
            });
     }
 
@@ -44,7 +50,8 @@ let AddExperience = ({isLoading, profileOverview, currentUser, requestOverview, 
     if(userObj !== null ){
       var userObjJson = JSON.parse(userObj);
       console.log("Json User Obj", userObjJson);
-      let token = "JWT " + userObjJson.access_token
+      let token = "JWT " + userObjJson.access_token;
+      setPostBtnText("Submitting please wait...");
       postAction(token, data);
     }
   }
@@ -70,7 +77,7 @@ let AddExperience = ({isLoading, profileOverview, currentUser, requestOverview, 
     </div>
   </div>
   {/* Page Header End */}
-
+  <ToastContainer position="bottom-left" />
   {/* Content section Start */}
   { isLoading
      ?   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
@@ -112,7 +119,7 @@ let AddExperience = ({isLoading, profileOverview, currentUser, requestOverview, 
                   <option value="3">Hobby</option>
                 </select>
               </div>
-              <button className="btn btn-common">Submit</button>
+              <button className="btn btn-common">{ postBtnText }</button>
             </form>
           </div>
         </div>

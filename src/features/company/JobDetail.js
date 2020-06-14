@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import featuredImg4 from '../../assets/img/features/img4.png';
 
 import CompanyApi from './CompanyApi';
@@ -15,7 +15,7 @@ let JobDetail = () => {
   const [joblistloaded, setJoblistLoaded] = useState(false);
   const [jobList, setJobList] = useState([]);
   const [requestFetching, setRequestFetching] = useState(false);
-  const [applyBtnText, setApplyBtnText] = useState('Apply Now')
+  const [applyBtnText, setApplyBtnText] = useState('Apply Now');
   const [enrollStatus, setEnrollStatus] = useState(false)
   let { id } = useParams();
 

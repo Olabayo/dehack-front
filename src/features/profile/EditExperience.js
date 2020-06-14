@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { requestOverview, cancelOverviewRequest } from './profileSlice';
 
 import ProfileApi from './ProfileApi';
@@ -25,9 +26,10 @@ let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview,
   const { register: register, handleSubmit: handleSubmit,  errors: errors } = useForm();
 
   const [experienceloaded, setLoaded] = useState(false);
-    const [experienceResult, setResultLoaded] = useState({});
+  const [experienceResult, setResultLoaded] = useState({});
+  const [editBtnText, setEditBtnText] = useState('Submit');
 
-    let { id } = useParams();
+  let { id } = useParams();
 
   function postAction(token, data){
 
@@ -37,9 +39,13 @@ let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview,
           .then(json => {
             console.log(json);
             cancelOverviewRequest();
+            toast("Request successful");
+            setEditBtnText("Submit");
           })
           .catch(message => {
               cancelOverviewRequest();
+              toast("Request error");
+              setEditBtnText("Submit");
            });
     }
 
@@ -49,7 +55,8 @@ let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview,
     if(userObj !== null ){
       var userObjJson = JSON.parse(userObj);
       console.log("Json User Obj", userObjJson);
-      let token = "JWT " + userObjJson.access_token
+      let token = "JWT " + userObjJson.access_token;
+      setEditBtnText("Submitting please wait...");
       postAction(token, data);
     }
   }
@@ -100,7 +107,7 @@ let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview,
     </div>
   </div>
   {/* Page Header End */}
-
+  <ToastContainer position="bottom-left" />
   {/* Content section Start */}
   { isLoading
      ?   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
@@ -142,7 +149,7 @@ let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview,
                   <option value="3">Hobby</option>
                 </select>
               </div>
-              <button className="btn btn-common">Submit</button>
+              <button className="btn btn-common">{editBtnText}</button>
             </form>
           </div>
         </div>

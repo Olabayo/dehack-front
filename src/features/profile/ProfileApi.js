@@ -130,6 +130,35 @@ export default {
       })
   },
 
+  putEducation: (token, params, id) => {
+    return new Promise( (resolve, reject) => {
+      fetch(_putEducation + `/${id}`, {
+          method: 'put',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': token
+          },
+          body: JSON.stringify(params)
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            reject(response.statusText);
+          }
+            return response;
+          })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            resolve(result)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
+      })
+  },
+
   postExperience: (token, params) => {
     return new Promise( (resolve, reject) => {
       fetch(_postExperience, {
