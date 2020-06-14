@@ -24,6 +24,25 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancelOverviewRequest, receiveOverview}) => {
 
+  function genSkill(){
+    var min=1;
+    var max=10;
+    var random = Math.floor(Math.random() * (+max - +min)) + +min;
+    var rank_text = "Highly skilled";
+    if(random >= 8){
+      rank_text = "Highly skilled";
+    }else if (random === 7) {
+      rank_text = "Moderately skilled";
+    }else if (random >= 5 && random < 7) {
+      rank_text = "Averagly skilled";
+    }else{
+      rank_text = "Below Averagly skilled";
+    }
+    return {"rank": random, "rank_text": rank_text};
+  }
+
+  const ranking = genSkill();
+
   const [profileloaded, setLoaded] = useState(false);
 
   function getOverview(token){
@@ -114,6 +133,11 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
 
                   </>
                  }
+                </div>
+                <div className="resume-exp float-right">
+                  <a href="#" className="btn btn-common btn-xs">
+                    Rank: {ranking.rank} ({ranking.rank_text})
+                  </a>
                 </div>
               </div>
               <div className="about-me item">
