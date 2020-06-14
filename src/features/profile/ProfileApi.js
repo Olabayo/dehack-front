@@ -1,6 +1,7 @@
 import {configSettings} from '../../config/config';
 
 const _profileOverviewUrl = configSettings.apiEndPoint + '/profileoverview';
+const _viewProfileOverviewUrl = configSettings.apiEndPoint + '/viewprofileoverview';
 const _postProfile = configSettings.apiEndPoint + '/profiles';
 const _postEducation = configSettings.apiEndPoint + '/education';
 const _postExperience = configSettings.apiEndPoint + '/experiences';
@@ -18,6 +19,34 @@ export default {
   getOverview: (token) => {
     return new Promise( (resolve, reject) => {
       fetch(_profileOverviewUrl, {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': token
+          }
+        })
+        .then(function(response) {
+          if (!response.ok) {
+            reject(response.statusText);
+          }
+            return response;
+          })
+        .then(res => res.json())
+        .then(
+          (result) => {
+            resolve(result)
+          },
+          (error) => {
+            reject(error)
+          }
+        )
+      })
+  },
+
+  viewOverview: (token, profile_id) => {
+    return new Promise( (resolve, reject) => {
+      fetch(_viewProfileOverviewUrl + `?profile_id=${profile_id}`, {
           method: 'get',
           headers: {
             'Content-Type': 'application/json',

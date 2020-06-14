@@ -9,6 +9,7 @@ import Navbar from './features/navbar/Navbar';
 import Homepage from './features/home/Home';
 import Contact from './features/contact/ContactUs';
 import Profile from "./features/profile/Profile";
+import ViewProfile from "./features/profile/ViewProfile";
 import CompanyProfile from "./features/company/CompanyProfile";
 import ChangePass from "./features/profile/ChangePass";
 import AddEditProfile from "./features/profile/AddEditProfile";
@@ -106,6 +107,7 @@ const [authloaded, setAuth] = useState(false);
         <Route path="/signupRecruit" component={SignupRecruit} />
         <Route path="/authstatus" component={AuthStatus} />
         <Route path="/profile" component={Profile} />
+        <Route path="/viewprofile/:profile_id" component={ViewProfile} />
         <Route path="/companyprofile" component={CompanyProfile} />
         <Route path="/manageprofile" component={AddEditProfile} />
         <Route path="/addeducation" component={AddEducation} />

@@ -35,7 +35,7 @@ let Navbar = ({ isLoading, currentUser, clearAuth }) => {
       event.preventDefault()
       localStorage.removeItem('userObj');
       clearAuth();
-      history.push("/")
+      history.push("/");
     }
 
   return(

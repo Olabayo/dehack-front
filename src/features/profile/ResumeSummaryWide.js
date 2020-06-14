@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 import avatar from '../../assets/img/jobs/avatar-1.jpg'
 
 let ResumeSummaryWide = ({ resume}) => {
@@ -31,7 +31,7 @@ let ResumeSummaryWide = ({ resume}) => {
           <a href="resume.html"><img className="resume-thumb" src={avatar} alt=""/></a>
           <div className="manager-info">
             <div className="manager-name">
-              <h4><a href="#">{resume.user.first_name} {resume.user.last_name}</a></h4>
+              <h4><Link to={`/viewprofile/${resume.id}`}>{resume.user.first_name} {resume.user.last_name}</Link></h4>
               <h5>.Net developer</h5>
             </div>
             <div className="manager-meta">
