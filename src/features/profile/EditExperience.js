@@ -23,7 +23,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview, cancelOverviewRequest}) => {
 
-  const { register: register, handleSubmit: handleSubmit,  errors: errors } = useForm();
+  const { register, handleSubmit,  errors } = useForm();
 
   const [experienceloaded, setLoaded] = useState(false);
   const [experienceResult, setResultLoaded] = useState({});
@@ -84,7 +84,7 @@ let EditExperience = ({isLoading, profileOverview, currentUser, requestOverview,
           getExperience(token, id)
         }
     }
-  });
+  }, [experienceloaded, id]);
 
   return(
       <>

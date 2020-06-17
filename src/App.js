@@ -37,7 +37,7 @@ import './assets/css/responsive.css';
 
 import {
   Switch,
-  Route, BrowserRouter
+  Route
 } from "react-router-dom";
 
 import {

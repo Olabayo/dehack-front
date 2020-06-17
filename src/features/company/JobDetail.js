@@ -2,7 +2,6 @@ import React, { useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import featuredImg4 from '../../assets/img/features/img4.png';
 
 import CompanyApi from './CompanyApi';
 
@@ -76,8 +75,8 @@ let JobDetail = () => {
     if(userObj !== null){
       var userObjJson = JSON.parse(userObj);
       token = "JWT " + userObjJson.access_token;
-      if(requestFetching == false){
-        if(enrollStatus == false){
+      if(requestFetching === false){
+        if(enrollStatus === false){
         setRequestFetching(true);
         setApplyBtnText("Applying please wait...");
         postApplication(token);
@@ -104,7 +103,7 @@ let JobDetail = () => {
       setLoaded(true)
       getJob(id)
     }
-  });
+  }, [joblistloaded, jobloaded, id]);
 
   return(
     <>
@@ -158,7 +157,7 @@ let JobDetail = () => {
               </ul>
               <h5>How To Apply</h5>
               <p>Create an account upload a profile and apply here</p>
-              <a onClick={handleApply} className="btn btn-common">
+              <a href="!#" onClick={handleApply} className="btn btn-common">
                 {applyBtnText}
               </a>
             </div>
@@ -169,7 +168,7 @@ let JobDetail = () => {
                 <h3>Job Location</h3>
                 <div className="maps">
                   <div id="map" class="map-full">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d405691.57240383344!2d-122.3212843181106!3d37.40247298383319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb68ad0cfc739%3A0x7eb356b66bd4b50e!2sSilicon+Valley%2C+CA%2C+USA!5e0!3m2!1sen!2sbd!4v1538319316724" allowfullscreen=""></iframe>
+                    <iframe title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d405691.57240383344!2d-122.3212843181106!3d37.40247298383319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb68ad0cfc739%3A0x7eb356b66bd4b50e!2sSilicon+Valley%2C+CA%2C+USA!5e0!3m2!1sen!2sbd!4v1538319316724" allowfullscreen=""></iframe>
                   </div>
                 </div>
               </div>
@@ -184,15 +183,15 @@ let JobDetail = () => {
                     </div>
                   </form>
                   <ul className="mt-4 footer-social">
-                    <li><a className="facebook" href="#"><i className="lni-facebook-filled"></i></a></li>
-                    <li><a className="twitter" href="#"><i className="lni-twitter-filled"></i></a></li>
-                    <li><a className="linkedin" href="#"><i className="lni-linkedin-fill"></i></a></li>
-                    <li><a className="google-plus" href="#"><i className="lni-google-plus"></i></a></li>
+                    <li><a className="facebook" href="!#"><i className="lni-facebook-filled"></i></a></li>
+                    <li><a className="twitter" href="!#"><i className="lni-twitter-filled"></i></a></li>
+                    <li><a className="linkedin" href="!#"><i className="lni-linkedin-fill"></i></a></li>
+                    <li><a className="google-plus" href="!#"><i className="lni-google-plus"></i></a></li>
                   </ul>
                   <div className="meta-tag">
-                    <span class="meta-part"><a href="#"><i className="lni-star"></i> Write a Review</a></span>
-                    <span class="meta-part"><a href="#"><i className="lni-warning"></i> Reports</a></span>
-                    <span class="meta-part"><a href="#"><i className="lni-share"></i> Share</a></span>
+                    <span class="meta-part"><a href="!#"><i className="lni-star"></i> Write a Review</a></span>
+                    <span class="meta-part"><a href="!#"><i className="lni-warning"></i> Reports</a></span>
+                    <span class="meta-part"><a href="!#"><i className="lni-share"></i> Share</a></span>
                   </div>
                 </div>
               </div>

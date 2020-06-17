@@ -24,7 +24,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview, cancelOverviewRequest, receiveOverview}) => {
 
-    const { register: register, handleSubmit: handleSubmit,  errors: errors } = useForm();
+    const { register, handleSubmit,  errors } = useForm();
 
     const [profileloaded, setLoaded] = useState(false);
 
@@ -60,10 +60,10 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
           getOverview(token)
       }
     }
-    });
+  }, [profileloaded]);
 
     function handleStateChange(event){
-      if(event.target.value == "0" || event.target.value == 0){
+      if(event.target.value === "0" || event.target.value === 0){
         setCityList([])
       }else{
       ProfileApi
@@ -117,7 +117,7 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
         }
 
     function onSubmit(data){
-      if(data.state_id == "0" || data.state_id == 0){
+      if(data.state_id === "0" || data.state_id === 0){
         alert("Pick a state")
       }else{
 
@@ -214,7 +214,7 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
                     }
                     { stateList.map((state, i) =>
                       <>
-                        { profileResult && profileResult.state_id == state.id
+                        { profileResult && profileResult.state_id === state.id
                           ?<option selected value={state.id}>{state.state_name}</option>
                           :<option value={state.id}>{state.state_name}</option>
                         }
@@ -232,7 +232,7 @@ let AddEditProfile =  ({isLoading, profileOverview, currentUser, requestOverview
                   <select className="form-control" name="city_id" ref={register({ required: true })}>
                     { cityList.map((state, i) =>
                       <>
-                        { profileResult && profileResult.city_id == state.id
+                        { profileResult && profileResult.city_id === state.id
                           ?<option selected value={state.id}>{state.city}</option>
                           :<option value={state.id}>{state.city}</option>
                         }

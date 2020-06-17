@@ -45,18 +45,18 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
 
   const [profileloaded, setLoaded] = useState(false);
 
-  function getOverview(token){
-    ProfileApi
-        .getOverview(token)
-          .then(response => response)
-          .then(json => {
-            console.log(json);
-            receiveOverview(json.overview)
-          })
-          .catch(message => { });
-  }
-
   useEffect(() => {
+
+    function getOverview(token){
+      ProfileApi
+          .getOverview(token)
+            .then(response => response)
+            .then(json => {
+              console.log(json);
+              receiveOverview(json.overview)
+            })
+            .catch(message => { });
+    }
 
     if(!profileloaded){
       var userObj = localStorage.getItem('userObj', '');
@@ -68,7 +68,7 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
           getOverview(token)
         }
     }
-  });
+  }, [profileloaded, receiveOverview]);
 
   return(
         <>
@@ -120,10 +120,10 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
                   <p className="sub-title">UI/UX Designer</p>
                   <p><span className="address"><i className="lni-map-marker"></i>Mahattan, NYC, USA</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
                   <div className="social-link">
-                    <a href="#" className="Twitter"><i className="lni-twitter-filled"></i></a>
-                    <a href="#" className="facebook"><i className="lni-facebook-filled"></i></a>
-                    <a href="#" className="google"><i className="lni-google-plus"></i></a>
-                    <a href="#" className="linkedin"><i className="lni-linkedin-fill"></i></a>
+                    <a href="!#" className="Twitter"><i className="lni-twitter-filled"></i></a>
+                    <a href="!#" className="facebook"><i className="lni-facebook-filled"></i></a>
+                    <a href="!#" className="google"><i className="lni-google-plus"></i></a>
+                    <a href="!#" className="linkedin"><i className="lni-linkedin-fill"></i></a>
                   </div>
                   </>
                   :
@@ -135,7 +135,7 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
                  }
                 </div>
                 <div className="resume-exp float-right">
-                  <a href="#" className="btn btn-common btn-xs">
+                  <a href="!#" className="btn btn-common btn-xs">
                     Rank: {ranking.rank} ({ranking.rank_text})
                   </a>
                 </div>

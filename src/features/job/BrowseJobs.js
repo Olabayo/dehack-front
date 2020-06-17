@@ -28,11 +28,11 @@ let BrowseJobs = () =>{
   const mountedRef = useRef(true);
 
   function handleFilterClick(){
-      if(filterString != filterStringUpdate){
+      if(filterString !== filterStringUpdate){
         let encodeQuery = encodeURIComponent(filterStringUpdate).replace(/%20/g, '+')
         let uri = "/browse/jobs?q=";
         setJoblistLoaded(false);
-        if(filterStringUpdate && filterStringUpdate.trim() != ""){
+        if(filterStringUpdate && filterStringUpdate.trim() !== ""){
           history.push(uri + encodeQuery)
         }else{
           history.push("/browse/jobs");
@@ -49,7 +49,7 @@ let BrowseJobs = () =>{
     var offset = data.selected + 1;
     if(jobListPage !== offset){
       let pathParam = "/browse/jobs?c=10&p=" + offset
-      if(filterString && filterString.trim() != ""){
+      if(filterString && filterString.trim() !== ""){
         pathParam = pathParam + "&q="  + filterString
       }
       var url = configSettings.apiEndPoint + pathParam;
@@ -87,7 +87,7 @@ let BrowseJobs = () =>{
       }
       setJoblistLoaded(true)
       let pathParam = '/browse/jobs?c=10&p=1'
-      if(query.get("q") && query.get("q").trim() != ""){
+      if(query.get("q") && query.get("q").trim() !== ""){
         pathParam = pathParam + "&q=" + query.get("q")
       }
       let url = configSettings.apiEndPoint + pathParam;
@@ -96,7 +96,7 @@ let BrowseJobs = () =>{
     return function cleanup() {
       mountedRef.current = false
     };
-  });
+  }, [joblistloaded, query]);
 
   return(
     <>
@@ -156,7 +156,7 @@ let BrowseJobs = () =>{
             { jobListCount > 0 &&
             <ReactPaginate previousLabel={"previous"}
                           nextLabel={"next"}
-                          breakLabel={<a href="">...</a>}
+                          breakLabel={<a href="!#">...</a>}
                           breakClassName={"break-me"}
                           pageCount={ jobListCount }
                           marginPagesDisplayed={2}

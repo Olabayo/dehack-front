@@ -22,7 +22,7 @@ let ChangePass = ({ isLoading, requestChangePass, cancelChangePassRequest }) => 
   const [errorExists, setError] = useState(false);
   const [responseSucces, setSuccess] = useState(false);
 
-  const { register: register, handleSubmit: handleSubmit,  reset: reset, errors: errors } = useForm();
+  const { register, handleSubmit,  reset, errors } = useForm();
 
   function postAction(token, data){
 
@@ -97,10 +97,10 @@ let ChangePass = ({ isLoading, requestChangePass, cancelChangePassRequest }) => 
             </div>
             <div className="col-md-8 col-sm-8 col-xs-12">
               <div className="job-alerts-item">
-                { errorExists == true &&
+                { errorExists === true &&
                   <div class="alert alert-danger">Error occured please try again</div>
                 }
-                { responseSucces == true &&
+                { responseSucces === true &&
                   <div class="alert alert-success">Your password was changed</div>
                 }
                 <h3 className="alerts-title">Change Password</h3>

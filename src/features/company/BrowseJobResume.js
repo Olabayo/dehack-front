@@ -1,11 +1,9 @@
-import React, {useState, useEffect } from 'react';
+import React, {useState, useEffect, useCallback } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Link, useParams } from 'react-router-dom';
 import CompanyApi from './CompanyApi';
 
 import ResumeSummaryWide from '../profile/ResumeSummaryWide';
-
-import avatar from '../../assets/img/jobs/avatar-1.jpg'
 
 let BrowseJobResume = () =>{
 
@@ -14,10 +12,9 @@ let BrowseJobResume = () =>{
   const [tokenStr, setTokenStr] = useState("");
   const [resumeListPage, setResumeListPage] = useState(0);
   const [resumeListCount, setResumeListCount] = useState(0);
-  const [emptyList, setEmptyList] = useState(false);
   let { id } = useParams();
 
-  function getApplications(token, page, count){
+  const getApplications = useCallback(function getApplications(token, page, count){
     CompanyApi
         .getApplications(token, page, count, id)
           .then(response => response)
@@ -28,9 +25,10 @@ let BrowseJobResume = () =>{
             setResumeListPage(page);
           })
           .catch(message => {
-            setEmptyList(true);
+
            });
-  }
+  }, [id])
+
 
   function handlePageClick(data){
     var offset = data.selected + 1;
@@ -59,7 +57,7 @@ let BrowseJobResume = () =>{
           getApplications(token, 1, 10)
         }
     }
-  });
+  }, [resumelistloaded, getApplications]);
 
   return(
     <>
@@ -94,7 +92,7 @@ let BrowseJobResume = () =>{
             ))
             }
             <div className="col-12 text-center mt-4">
-              { resumelistloaded && resumeList.length == 0 &&
+              { resumelistloaded && resumeList.length === 0 &&
                 <Link to="/" className="btn btn-common no-jobs-btn">No resumes</Link>
               }
             </div>
@@ -102,7 +100,7 @@ let BrowseJobResume = () =>{
               { resumeListCount > 0 &&
               <ReactPaginate previousLabel={"previous"}
                             nextLabel={"next"}
-                            breakLabel={<a href="">...</a>}
+                            breakLabel={<a href="!#">...</a>}
                             breakClassName={"break-me"}
                             pageCount={ resumeListCount }
                             marginPagesDisplayed={2}

@@ -5,8 +5,6 @@ import ProfileApi from './ProfileApi';
 
 import ResumeSummary from './ResumeSummary';
 
-import avatar from '../../assets/img/jobs/avatar-1.jpg'
-
 let BrowseResume = () =>{
 
   const [resumelistloaded, setResumelistLoaded] = useState(false);
@@ -58,7 +56,7 @@ let BrowseResume = () =>{
           browseResumes(token, 1, 10)
         }
     }
-  });
+  }, [resumelistloaded]);
 
   return(
     <>
@@ -121,7 +119,7 @@ let BrowseResume = () =>{
                 ))
             }
             <div className="col-12 text-center mt-4">
-              { emptyList == true && resumelistloaded && resumeList.length == 0 &&
+              { emptyList === true && resumelistloaded && resumeList.length === 0 &&
                 <Link to="/" className="btn btn-common no-jobs-btn">No resumes</Link>
               }
             </div>
@@ -142,7 +140,7 @@ let BrowseResume = () =>{
               { resumeListCount > 0 &&
               <ReactPaginate previousLabel={"previous"}
                             nextLabel={"next"}
-                            breakLabel={<a href="">...</a>}
+                            breakLabel={<a href="!#">...</a>}
                             breakClassName={"break-me"}
                             pageCount={ resumeListCount }
                             marginPagesDisplayed={2}

@@ -13,7 +13,7 @@ function Contact(){
 {/* Page Header Start */}
     <div className="page-header">
       <div className="container">
-        <div className="row">         
+        <div className="row">
           <div className="col-lg-12">
             <div className="inner-header">
               <h3>Contact</h3>
@@ -22,13 +22,13 @@ function Contact(){
         </div>
       </div>
     </div>
-    {/* Page Header End */}  
-    
+    {/* Page Header End */}
+
     {/* Contact Section Start */}
-    <section id="contact" className="section">      
+    <section id="contact" className="section">
       <div className="contact-form">
         <div className="container">
-          <div className="row contact-form-area">          
+          <div className="row contact-form-area">
             <div className="col-md-12 col-lg-6 col-sm-12">
               <div className="contact-block">
                 <h2>Contact Form</h2>
@@ -38,13 +38,13 @@ function Contact(){
                       <div className="form-group">
                         <input type="text" className="form-control" id="name" name="name" placeholder="Name" required data-error="Please enter your name"/>
                         <div className="help-block with-errors"></div>
-                      </div>                                 
+                      </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
                         <input type="text" placeholder="Email" id="email" className="form-control" name="name" required data-error="Please enter your email"/>
                         <div className="help-block with-errors"></div>
-                      </div> 
+                      </div>
                     </div>
                      <div className="col-md-12">
                       <div className="form-group">
@@ -53,17 +53,17 @@ function Contact(){
                       </div>
                     </div>
                     <div className="col-md-12">
-                      <div className="form-group"> 
+                      <div className="form-group">
                         <textarea className="form-control" id="message" placeholder="Your Message" rows="5" data-error="Write your message" required></textarea>
                         <div className="help-block with-errors"></div>
                       </div>
                       <div className="submit-button">
                         <button className="btn btn-common" id="submit" type="submit">Send Message</button>
-                        <div id="msgSubmit" className="h3 text-center hidden"></div> 
-                        <div className="clearfix"></div> 
+                        <div id="msgSubmit" className="h3 text-center hidden"></div>
+                        <div className="clearfix"></div>
                       </div>
                     </div>
-                  </div>            
+                  </div>
                 </form>
               </div>
             </div>
@@ -88,20 +88,20 @@ function Contact(){
                     <div className="contact-icon">
                       <i className="lni-phone-handset"></i>
                     </div>
-                    <p><a href="#">Main Office: +880 123 456 789</a></p>
-                    <p><a href="#">Customer Supprort: +880 123 456 789</a></p>
+                    <p><a href="!#">Main Office: +880 123 456 789</a></p>
+                    <p><a href="!#">Customer Supprort: +880 123 456 789</a></p>
                   </div>
                 </div>
               </div>
             </div>
             <div className="col-md-12">
               <div id="conatiner-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13004080.414077152!2d-104.65693512785852!3d37.27559283318413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1530855407925" allowfullscreen=""></iframe>
-              </div> 
+                <iframe title="Map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13004080.414077152!2d-104.65693512785852!3d37.27559283318413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54eab584e432360b%3A0x1c3bb99243deb742!2sUnited+States!5e0!3m2!1sen!2sin!4v1530855407925" allowfullscreen=""></iframe>
+              </div>
             </div>
           </div>
         </div>
-      </div>   
+      </div>
     </section>
 
     {/* Contact Section End */}

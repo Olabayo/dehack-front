@@ -21,7 +21,7 @@ let AddJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
   const [errorExists, setError] = useState(false);
   const [responseSucces, setSuccess] = useState(false);
 
-  const { register: register, handleSubmit: handleSubmit,  reset: reset, errors: errors } = useForm();
+  const { register, handleSubmit,  reset, errors } = useForm();
 
   function postAction(token, data){
 
@@ -86,10 +86,10 @@ let AddJob = ({isLoading, requestProfile, cancelProfileRequest}) => {
       <div className="row justify-content-center">
         <div className="col-lg-9 col-md-12 col-xs-12">
           <div className="add-resume box">
-          { errorExists == true &&
+          { errorExists === true &&
             <div class="alert alert-danger">Error occured please try again</div>
           }
-          { responseSucces == true &&
+          { responseSucces === true &&
             <div class="alert alert-success">Your job was posted</div>
           }
             <form className="form-ad" onSubmit={handleSubmit(onSubmit)}>

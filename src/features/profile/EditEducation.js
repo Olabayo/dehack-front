@@ -24,7 +24,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let EditEducation = ({isLoading, profileOverview, currentUser, requestOverview, cancelOverviewRequest}) => {
 
-  const { register: register, handleSubmit: handleSubmit,  errors: errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const [educationloaded, setLoaded] = useState(false);
   const [educationResult, setResultLoaded] = useState({});
@@ -85,7 +85,7 @@ let EditEducation = ({isLoading, profileOverview, currentUser, requestOverview, 
           getEducation(token, id)
         }
     }
-  });
+  }, [educationloaded, id]);
 
   return(
       <>

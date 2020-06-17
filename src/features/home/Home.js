@@ -16,17 +16,6 @@ import JobApi from '../job/JobApi';
 
 let Homepage = () => {
 
-  const languages = [
-    {
-      title: 'C',
-      year: 1972
-    },
-    {
-      title: 'Elm',
-      year: 2012
-    }
-  ];
-
   const [jobloaded, setJobLoaded] = useState(false);
   const [jobList, setJobList] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -34,16 +23,6 @@ let Homepage = () => {
   const mountedRef = useRef(true)
 
   // Imagine you have a list of languages that you'd like to autosuggest.
-
-  // Teach Autosuggest how to calculate suggestions for any given input value.
-  const getSuggestions = value => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-
-    return inputLength === 0 ? [] : languages.filter(lang =>
-      lang.title.toLowerCase().slice(0, inputLength) === inputValue
-    );
-  };
 
   const getSuggestionValue = suggestion => suggestion.title;
 
@@ -132,7 +111,7 @@ let Homepage = () => {
     return function cleanup() {
       mountedRef.current = false
     };
-  });
+  }, [jobloaded]);
 
   return (
     <>
@@ -217,7 +196,7 @@ let Homepage = () => {
 
             }
             <div className="col-12 text-center mt-4">
-              { jobloaded == true &&
+              { jobloaded === true &&
                 <>
                 { jobList.length > 0
                 ?<Link to="/browse/jobs" className="btn btn-common browse-all-btn">Browse All Jobs</Link>

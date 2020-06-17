@@ -23,17 +23,6 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
     const [jobloaded, setJobLoaded] = useState(false);
     const [jobList, setJobList] = useState([]);
 
-    function getProfile(token, compId){
-      CompanyApi
-          .getCompany(token, compId)
-            .then(response => response)
-            .then(json => {
-              console.log(json);
-              receiveProfile(json.company)
-            })
-            .catch(message => { });
-    }
-
     function getJobs(token){
       CompanyApi
           .getJobs(token, 1, 10)
@@ -47,10 +36,21 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
 
     useEffect(() => {
 
+      function getProfile(token, compId){
+        CompanyApi
+            .getCompany(token, compId)
+              .then(response => response)
+              .then(json => {
+                console.log(json);
+                receiveProfile(json.company)
+              })
+              .catch(message => { });
+      }
+
       if(!profileloaded){
-        var userObj = localStorage.getItem('userObj', '');
+        let userObj = localStorage.getItem('userObj', '');
           if(userObj !== null ){
-            var userObjJson = JSON.parse(userObj);
+            let userObjJson = JSON.parse(userObj);
             console.log("Json User Obj", userObjJson);
             let token = "JWT " + userObjJson.access_token
             setLoaded(true)
@@ -58,16 +58,16 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
           }
       }
       if(!jobloaded){
-        var userObj = localStorage.getItem('userObj', '');
+        let userObj = localStorage.getItem('userObj', '');
           if(userObj !== null ){
-            var userObjJson = JSON.parse(userObj);
+            let userObjJson = JSON.parse(userObj);
             console.log("Json User Obj", userObjJson);
             let token = "JWT " + userObjJson.access_token
             setJobLoaded(true)
             getJobs(token)
           }
       }
-    });
+    }, [profileloaded, jobloaded, receiveProfile]);
 
     return(
         <>
@@ -111,10 +111,10 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
                   <p className="sub-title">Industry</p>
                   <p><span className="address"><i className="lni-map-marker"></i>Mahattan, NYC, USA</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
                   <div className="social-link">
-                    <a href="#" className="Twitter"><i className="lni-twitter-filled"></i></a>
-                    <a href="#" className="facebook"><i className="lni-facebook-filled"></i></a>
-                    <a href="#" className="google"><i className="lni-google-plus"></i></a>
-                    <a href="#" className="linkedin"><i className="lni-linkedin-fill"></i></a>
+                    <a href="!#" className="Twitter"><i className="lni-twitter-filled"></i></a>
+                    <a href="!#" className="facebook"><i className="lni-facebook-filled"></i></a>
+                    <a href="!#" className="google"><i className="lni-google-plus"></i></a>
+                    <a href="!#" className="linkedin"><i className="lni-linkedin-fill"></i></a>
                   </div>
                 </div>
               </div>

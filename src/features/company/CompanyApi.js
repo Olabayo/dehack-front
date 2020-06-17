@@ -127,7 +127,7 @@ export default {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
-    if(token != ""){
+    if(token !== ""){
       headers = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',

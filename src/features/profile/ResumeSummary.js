@@ -12,7 +12,7 @@ let ResumeSummary = ({ resume}) => {
           <a href="resume.html"><img className="resume-thumb" src={avatar} alt=""/></a>
           <div className="manager-info">
             <div className="manager-name">
-              <h4><a href="#">{resume.user.first_name} {resume.user.last_name}</a></h4>
+              <h4><a href="!#">{resume.user.first_name} {resume.user.last_name}</a></h4>
               <h5>.Net developer</h5>
             </div>
             <div className="manager-meta">
@@ -33,7 +33,7 @@ let ResumeSummary = ({ resume}) => {
               <span>Wordpress</span>
             </div>
             <div className="resume-exp float-right">
-              <a href="#" className="btn btn-common btn-xs">Exp. 4 Year</a>
+              <a href="!#" className="btn btn-common btn-xs">Exp. 4 Year</a>
             </div>
           </div>
         </div>

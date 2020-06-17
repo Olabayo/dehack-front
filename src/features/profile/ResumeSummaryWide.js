@@ -52,7 +52,7 @@ let ResumeSummaryWide = ({ resume}) => {
               <span>Wordpress</span>
             </div>
             <div className="resume-exp float-right">
-              <a href="#" className="btn btn-common btn-xs">
+              <a href="!#" className="btn btn-common btn-xs">
                 Rank: {ranking.rank} ({ranking.rank_text})
               </a>
             </div>

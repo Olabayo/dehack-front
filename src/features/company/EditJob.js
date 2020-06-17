@@ -27,7 +27,7 @@ let EditJob = ({ breadcrumbs, isLoading, requestProfile, cancelProfileRequest })
 
   let { id } = useParams();
 
-  const { register: register, handleSubmit: handleSubmit,  reset: reset, errors: errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   function postAction(token, data){
 
@@ -82,7 +82,7 @@ let EditJob = ({ breadcrumbs, isLoading, requestProfile, cancelProfileRequest })
           getJob(token, id)
         }
     }
-  });
+  }, [jobloaded, id]);
 
   return(
       <>
@@ -118,10 +118,10 @@ let EditJob = ({ breadcrumbs, isLoading, requestProfile, cancelProfileRequest })
       <div className="row justify-content-center">
         <div className="col-lg-9 col-md-12 col-xs-12">
           <div className="add-resume box">
-          { errorExists == true &&
+          { errorExists === true &&
             <div class="alert alert-danger">Error occured please try again</div>
           }
-          { responseSucces == true &&
+          { responseSucces === true &&
             <div class="alert alert-success">Your job was posted</div>
           }
             <form className="form-ad" onSubmit={handleSubmit(onSubmit)}>

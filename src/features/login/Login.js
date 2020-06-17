@@ -32,7 +32,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAuth, clearAuth }) => {
 
   const [errorExists, setError] = useState(false);
-  const { register: register, handleSubmit: handleSubmit, errors: errors } = useForm();
+  const { register, handleSubmit, errors} = useForm();
   const mountedRef = useRef(true);
 
   let history = useHistory();
@@ -104,7 +104,7 @@ let Login = ({ isLoading, currentUser, requestAuth, cancelRequestAuth, receiveAu
         <div className="row justify-content-center">
           <div className="col-lg-5 col-md-6 col-xs-12">
             <div className="page-login-form box">
-            { errorExists == true &&
+            { errorExists === true &&
               <div className="alert alert-danger">Error occured please try again</div>
             }
               <h3>

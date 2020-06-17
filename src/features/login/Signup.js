@@ -24,7 +24,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let Signup  = ({isLoading, requestAuth, cancelRequestAuth}) =>{
 
-  const { register: register, handleSubmit: handleSubmit, errors: errors } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   let history = useHistory();
 
@@ -128,7 +128,7 @@ return(
     {/* Content section End */}
 
     {/*Go To Top Link */}
-    <a href="#" className="back-to-top">
+    <a href="!#" className="back-to-top">
       <i className="lni-arrow-up"></i>
     </a>
 

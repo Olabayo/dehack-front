@@ -24,7 +24,7 @@ const mapStateToProps = (state /*, ownProps*/) => {
 
 let AddEducation = ({isLoading, profileOverview, currentUser, requestOverview, cancelOverviewRequest, receiveOverview}) => {
 
-  const { register: register, handleSubmit: handleSubmit,  errors: errors } = useForm();
+  const { register, handleSubmit,  errors } = useForm();
   const [postBtnText, setPostBtnText] = useState('Submit');
 
   function postAction(token, data){

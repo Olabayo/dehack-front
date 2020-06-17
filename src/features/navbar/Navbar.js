@@ -69,10 +69,10 @@ let Navbar = ({ isLoading, currentUser, clearAuth }) => {
                 }
                 <li className="nav-item dropdown active">
                   { JSON.stringify(currentUser) !== '{}'
-                    ? <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ? <a className="nav-link dropdown-toggle" href="!#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Welcome { currentUser.first_name }
                       </a>
-                    : <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    : <a className="nav-link dropdown-toggle" href="!#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Sign Up
                       </a>
                   }
@@ -93,7 +93,7 @@ let Navbar = ({ isLoading, currentUser, clearAuth }) => {
                     </>
                     }
 
-                    <li><a className="dropdown-item" href="#" onClick={(event) => {
+                    <li><a className="dropdown-item" href="!#" onClick={(event) => {
                         logoutAction(event);
                       }
                     }>

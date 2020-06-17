@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link, useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Experience from './Experience';
 import Education from'./Education';
 
@@ -47,25 +47,25 @@ let ViewProfile = ({isLoading, profileOverview, currentUser, requestOverview, ca
 
   const ranking = genSkill();
 
-  function handleClick(){
+  function handleClick(event){
+    event.preventDefault();
     history.goBack();
   }
 
   const [profileloaded, setLoaded] = useState(false);
   let { profile_id } = useParams();
 
-  function getOverview(token){
-    ProfileApi
-        .viewOverview(token, profile_id)
-          .then(response => response)
-          .then(json => {
-            console.log(json);
-            receiveOverview(json.overview)
-          })
-          .catch(message => { });
-  }
-
   useEffect(() => {
+    function getOverview(token){
+      ProfileApi
+          .viewOverview(token, profile_id)
+            .then(response => response)
+            .then(json => {
+              console.log(json);
+              receiveOverview(json.overview)
+            })
+            .catch(message => { });
+    }
 
     if(!profileloaded){
       var userObj = localStorage.getItem('userObj', '');
@@ -77,7 +77,7 @@ let ViewProfile = ({isLoading, profileOverview, currentUser, requestOverview, ca
           getOverview(token)
         }
     }
-  });
+  },[profileloaded, profile_id, receiveOverview]);
 
   return(
         <>
@@ -89,7 +89,7 @@ let ViewProfile = ({isLoading, profileOverview, currentUser, requestOverview, ca
             <div className="inner-header">
               <h3>Resume</h3>
               <span>
-                <a className="no-href" onClick={handleClick}>View Resume</a> /
+                <a href="!#" className="no-href" onClick={handleClick}>View Resume</a> /
               </span>
             </div>
           </div>
@@ -106,7 +106,7 @@ let ViewProfile = ({isLoading, profileOverview, currentUser, requestOverview, ca
             <div className="right-sideabr">
               <h4>Manage Account</h4>
               <ul className="list-item">
-                <li><a className="active" href="#">Profile</a></li>
+                <li><a className="active" href="!#">Profile</a></li>
                 <li><a href="/">Logout</a></li>
               </ul>
             </div>
@@ -130,10 +130,10 @@ let ViewProfile = ({isLoading, profileOverview, currentUser, requestOverview, ca
                   <p className="sub-title">UI/UX Designer</p>
                   <p><span className="address"><i className="lni-map-marker"></i>Mahattan, NYC, USA</span> <span><i className="ti-phone"></i>(+01) 211-123-5678</span></p>
                   <div className="social-link">
-                    <a href="#" className="Twitter"><i className="lni-twitter-filled"></i></a>
-                    <a href="#" className="facebook"><i className="lni-facebook-filled"></i></a>
-                    <a href="#" className="google"><i className="lni-google-plus"></i></a>
-                    <a href="#" className="linkedin"><i className="lni-linkedin-fill"></i></a>
+                    <a href="!#" className="Twitter"><i className="lni-twitter-filled"></i></a>
+                    <a href="!#" className="facebook"><i className="lni-facebook-filled"></i></a>
+                    <a href="!#" className="google"><i className="lni-google-plus"></i></a>
+                    <a href="!#" className="linkedin"><i className="lni-linkedin-fill"></i></a>
                   </div>
                   </>
                   :
@@ -145,7 +145,7 @@ let ViewProfile = ({isLoading, profileOverview, currentUser, requestOverview, ca
                  }
                 </div>
                 <div className="resume-exp float-right">
-                  <a href="#" className="btn btn-common btn-xs">
+                  <a href="!#" className="btn btn-common btn-xs">
                     Rank: {ranking.rank} ({ranking.rank_text})
                   </a>
                 </div>
