@@ -40,3 +40,9 @@
 .no-href{
   color: #26ae61 !important;
 }
+.cover-descr-p{
+  padding-left: 20px;
+}
+.cover-video-img{
+  width: 100%;
+}

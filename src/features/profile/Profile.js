@@ -11,6 +11,9 @@ import { requestOverview, cancelOverviewRequest,
 import ProfileApi from './ProfileApi';
 
 import resumeImage from '../../assets/img/resume/img-1.png';
+import coverVideoPlaceholder from '../../assets/img/cover-video-placeholder.png';
+
+import './profile.css';
 
 const mapDispatch = { requestOverview, cancelOverviewRequest, receiveOverview }
 
@@ -100,6 +103,15 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
                 <li><a href="/">Logout</a></li>
               </ul>
             </div>
+
+            {/* Cover story video */}
+
+            <div className="right-sideabr">
+              <h4>My Cover Story</h4>
+              <p className="cover-descr-p"></p>
+              <a target="_blank" href="https://www.youtube.com/watch?v=9aj_6ajGjXg"><img className="cover-video-img" src={coverVideoPlaceholder} /></a>
+            </div>
+            {/* */}
           </div>
           <div className="col-lg-8 col-md-8 col-xs-12">
             <div className="inner-box my-resume">
