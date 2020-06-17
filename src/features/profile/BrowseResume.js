@@ -1,11 +1,18 @@
 import React, {useState, useEffect } from 'react';
 import ReactPaginate from 'react-paginate';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import ProfileApi from './ProfileApi';
 
 import ResumeSummary from './ResumeSummary';
 
 let BrowseResume = () =>{
+
+  let history = useHistory();
+
+  function handleClick(event){
+    event.preventDefault();
+    history.goBack();
+  }
 
   const [resumelistloaded, setResumelistLoaded] = useState(false);
   const [resumeList, setResumeList] = useState([]);
@@ -67,6 +74,11 @@ let BrowseResume = () =>{
           <div className="col-lg-12">
             <div className="inner-header">
               <h3>Browse Resumes</h3>
+              <div>
+              <span>
+              <a href="!#" className="no-href" onClick={handleClick}>Back</a> /
+              </span>
+              </div>
             </div>
           </div>
         </div>

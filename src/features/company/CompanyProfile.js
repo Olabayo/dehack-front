@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import  { requestProfile, cancelProfileRequest,  receiveProfile, clearProfile } from './companySlice';
 import Job from './Job';
 import CompanyApi from './CompanyApi';
@@ -22,6 +22,13 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
     const [profileloaded, setLoaded] = useState(false);
     const [jobloaded, setJobLoaded] = useState(false);
     const [jobList, setJobList] = useState([]);
+
+    let history = useHistory();
+
+    function handleClick(event){
+      event.preventDefault();
+      history.goBack();
+    }
 
     function getJobs(token){
       CompanyApi
@@ -78,6 +85,11 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
           <div className="col-lg-12">
             <div className="inner-header">
               <h3>Company profile</h3>
+              <div>
+              <span>
+              <a href="!#" className="no-href" onClick={handleClick}>Back</a> /
+              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -123,7 +135,7 @@ let CompanyProfile = ({ isLoading, companyProfileObj, requestProfile, cancelProf
                 <p>
 
                 </p>
-                <Link to="/manageprofile">Manage Info</Link>
+                <Link to="!#">Manage profile</Link>
               </div>
               <div className="work-experence item">
                 <h3>Jobs</h3>

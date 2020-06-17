@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Experience from './Experience';
 import Education from'./Education';
 
@@ -44,6 +44,13 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
     return {"rank": random, "rank_text": rank_text};
   }
 
+  let history = useHistory();
+
+  function handleClick(event){
+    event.preventDefault();
+    history.goBack();
+  }
+
   const ranking = genSkill();
 
   const [profileloaded, setLoaded] = useState(false);
@@ -82,6 +89,11 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
           <div className="col-lg-12">
             <div className="inner-header">
               <h3>Resume</h3>
+              <div>
+              <span>
+              <a href="!#" className="no-href" onClick={handleClick}>Back</a> /
+              </span>
+              </div>
             </div>
           </div>
         </div>
@@ -98,7 +110,6 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
               <h4>Manage Account</h4>
               <ul className="list-item">
                 <li><a className="active" href="/profile">Profile</a></li>
-                <li><a href="/notifications">Notifications </a></li>
                 <li><a href="/changePass">Change Password</a></li>
                 <li><a href="/">Logout</a></li>
               </ul>
