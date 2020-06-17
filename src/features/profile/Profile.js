@@ -109,7 +109,7 @@ let Profile = ({isLoading, profileOverview, currentUser, requestOverview, cancel
             <div className="right-sideabr">
               <h4>My Cover Story</h4>
               <p className="cover-descr-p"></p>
-              <a target="_blank" href="https://www.youtube.com/watch?v=9aj_6ajGjXg"><img className="cover-video-img" src={coverVideoPlaceholder} /></a>
+              <a target="_blank"  rel="noopener noreferrer" href="https://www.youtube.com/watch?v=9aj_6ajGjXg"><img alt="palceholder" className="cover-video-img" src={coverVideoPlaceholder} /></a>
             </div>
             {/* */}
           </div>
