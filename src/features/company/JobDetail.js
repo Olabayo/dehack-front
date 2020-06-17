@@ -69,7 +69,8 @@ let JobDetail = () => {
            });
   }
 
-  function handleApply(){
+  function handleApply(event){
+    event.preventDefault();
     let token = "";
     var userObj = localStorage.getItem('userObj', '');
     if(userObj !== null){
