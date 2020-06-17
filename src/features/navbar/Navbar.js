@@ -108,9 +108,11 @@ let Navbar = ({ isLoading, currentUser, clearAuth }) => {
                   }
                   </ul>
                 </li>
-                <li className="button-group">
-                  <a className="button btn btn-common" href="/addjob" >Post a Job</a>
-                </li>
+                { 'company_id' in currentUser && currentUser.company_id !== "" &&
+                  <li className="button-group">
+                    <a className="button btn btn-common" href="/addjob" >Post a Job</a>
+                  </li>
+                }
               </ul>
             </div>
           </div>
